@@ -2,11 +2,7 @@ from faker import Faker
 import requests
 import parsel
 import json
-import re,logging
-import sqlite3
-import datetime
-import os
-from time import strftime,gmtime
+import re
 
 TYPES=["PHONE","DESKTOP","RANDOM"]
 url = 'https://cn.bing.com'

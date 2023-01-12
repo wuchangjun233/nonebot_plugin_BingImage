@@ -1,7 +1,8 @@
 from nonebot import on_command, on_startswith
 from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
-from nonebot.adapters.onebot.v11.message import Message, MessageSegment
+from nonebot.adapters.ntchat import Message, MessageSegment
+from nonebot.adapters.ntchat import MessageEvent
 from nonebot.log import logger
 from nonebot.rule import to_me
 from nonebot import require
@@ -25,8 +26,8 @@ bing_mobile_matcher = on_command("bing手机图片",
 
 
 @help_matcher.handle()
-async def help(bot: Bot, event: Event, state: T_State):
-    await help_matcher.send(str(Help_info))
+async def help(bot: Bot, event: MessageEvent):
+    await help_matcher.send(str(MessageSegment.text(Help_info)))
 
 
 @bing_matcher.handle()
@@ -40,9 +41,8 @@ async def bing(bot: Bot, event: Event, state: T_State):
     msg_desc = Message(str("图片故事：" + description['description']))
     msg_maintext = Message(str("图片介绍：" + description['main_text']))
     msg = msg_title + Message("\n") + Message("\n") + msg_headline + Message("\n") + Message(
-        "\n") + msg_maintext + Message("\n") + Message("\n") + msg_desc + Message("\n") + Message("\n") + Message(
-        msg_img)
-    await bing_matcher.send(msg)
+        "\n") + msg_maintext + Message("\n") + Message("\n") + msg_desc + Message("\n") + Message("\n")
+    await bing_matcher.send(MessageSegment.text(msg) + MessageSegment.image(msg_img))
     logger.info("消息发送成功!")
 
 
@@ -51,8 +51,7 @@ async def bing_desktop(bot: Bot, event: Event, state: T_State):
     d_url = str(getBingImageURL())
     msg_img = MessageSegment.image(d_url)
     logger.info("图片获取成功!")
-    msg = Message(msg_img)
-    await bing_desktop_matcher.send(msg)
+    await bing_desktop_matcher.send(msg_img)
     logger.info("消息发送成功!")
 
 
@@ -61,6 +60,5 @@ async def bing_mobile(bot: Bot, event: Event, state: T_State):
     d_url = str(getBingVerticalImageURL())
     msg_img = MessageSegment.image(d_url)
     logger.info("图片获取成功!")
-    msg = Message(msg_img)
-    await bing_mobile_matcher.send(msg)
+    await bing_mobile_matcher.send(msg_img)
     logger.info("消息发送成功!")
