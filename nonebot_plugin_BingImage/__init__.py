@@ -15,7 +15,7 @@ from .utils import *
 Help_info = "Bing机器人帮助 \n🌈世界那么大，通过Bing到处看看~ \n🗺 /bing 获取今天的美图(图和故事) \n💻/bing电脑 获取今天的美图(单横板图片)\n📱/bing手机 获取今天的美图(单竖版图片)\n🔧更多功能开发中🔧 "
 
 help_matcher = on_command("bing帮助", aliases={'Bing帮助', '必应帮助', }, rule=to_me(),priority=1)
-bing_matcher = on_command("bing", aliases={'必应', 'bing每日一图', 'bing美图', 'Bing', 'BING'}, rule=to_me(),priority=2)
+bing_matcher = on_command("bing", aliases={'必应', 'bing每日一图', 'bing美图', 'Bing', 'BING'}, rule=to_me(),priority=7)
 
 bing_desktop_matcher = on_command("bing电脑图片",
                                   aliases={'bing桌面端图片', '电脑图片', '桌面端图片', 'bing电脑', 'bing桌面图片',
